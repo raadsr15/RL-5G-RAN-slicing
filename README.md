@@ -75,7 +75,7 @@ The agent is trained over multiple episodes, and performance is evaluated using 
 
 ## 📊 Results and Analysis
 
-This section presents the performance evaluation of the proposed **PPO-based RAN slicing agent** across multiple system-level metrics. Each subsection includes a placeholder to attach the corresponding figure, enabling clear visual interpretation of the learned policy behavior.
+This section presents the performance evaluation of the proposed **PPO-based RAN slicing agent** across multiple system-level metrics. 
 
 ---
 
