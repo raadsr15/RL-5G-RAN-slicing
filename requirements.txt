@@ -1,0 +1,7 @@
+numpy>=1.21
+gymnasium>=0.28
+stable-baselines3>=2.1.0
+shimmy>=1.3.0
+matplotlib>=3.5
+jupyter
+ipykernel
