@@ -1,3 +1,8 @@
+
+![lucid-origin_A_modern_abstract_telecommunications_background_featuring_realistic_telecom_infr-0](https://github.com/user-attachments/assets/a723f801-abbe-4c88-a5ff-ac60b633596e)
+
+
+
 # RL-Based Network Slicing for 5G RAN
 
 Fifth-generation (5G) and emerging sixth-generation (6G) wireless networks must support heterogeneous services with diverse and often conflicting performance requirements, including enhanced Mobile Broadband (eMBB), Ultra-Reliable Low-Latency Communication (URLLC), and massive Machine-Type Communication (mMTC). Network slicing enables these services to coexist on shared radio access infrastructure by providing logical isolation and service-specific guarantees. However, dynamically allocating limited radio resources across slices while satisfying stringent service-level agreements (SLAs) remains a challenging problem, particularly under time-varying traffic conditions.
