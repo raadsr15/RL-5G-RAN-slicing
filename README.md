@@ -70,6 +70,7 @@ To reflect service criticality, higher penalty weights are assigned to URLLC SLA
 The resource allocation policy is learned using **Proximal Policy Optimization (PPO)**, a policy-gradient reinforcement learning algorithm well-suited for continuous control problems. PPO provides stable policy updates by constraining the deviation between successive policies.
 
 The agent is trained over multiple episodes, and performance is evaluated using system-level metrics including average throughput, SLA violation rate, queue stability, and resource allocation fairness across slices.
+
 ---
 
 ## 📊 Results
