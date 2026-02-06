@@ -81,7 +81,8 @@ This section presents the performance evaluation of the proposed **PPO-based RAN
 
 ### 1. RB Allocation Policy Over Time
 
-![RB Allocation Policy Over Time](./figures/rb_allocation_over_time.png)
+<img width="686" height="393" alt="image" src="https://github.com/user-attachments/assets/6a5ce7c7-abb3-4f15-b660-45d9081d97de" />
+
 
 The learned policy shows a **highly skewed RB allocation** favoring URLLC, followed by mMTC, with eMBB receiving negligible resources. This reflects the reward structure’s prioritization of strict latency constraints for URLLC, causing the agent to aggressively avoid high-penalty SLA violations.
 
@@ -92,7 +93,8 @@ While URLLC performance is protected, this comes at the expense of eMBB starvati
 
 ### 2. Queue Length Evolution
 
-![Queue Length Evolution](./figures/queue_length_evolution.png)
+<img width="704" height="393" alt="image" src="https://github.com/user-attachments/assets/4cb0d651-3e6b-433e-8fef-446834513395" />
+
 
 The queue dynamics reveal **unbounded growth in the eMBB queue**, confirming persistent under-allocation of RBs to eMBB traffic. In contrast, URLLC and mMTC queues remain stable and near zero.
 
@@ -103,7 +105,8 @@ The PPO agent successfully stabilizes latency-sensitive slices but fails to main
 
 ### 3. SLA Violation Rate per Slice
 
-![SLA Violation Rate per Slice](./figures/sla_violation_rate.png)
+<img width="540" height="374" alt="image" src="https://github.com/user-attachments/assets/02ef52f3-d450-445c-9fd1-ff80ffb62550" />
+
 
 The SLA violation analysis shows:
 - **eMBB:** ~100% violation rate  
@@ -116,7 +119,8 @@ This outcome highlights the **dominance of URLLC penalties** in shaping the poli
 
 ### 4. Average Throughput per Slice
 
-![Average Throughput per Slice](./figures/average_throughput.png)
+<img width="531" height="374" alt="image" src="https://github.com/user-attachments/assets/283abcbf-5b58-4742-ad36-ec098ef8a326" />
+
 
 The average throughput results align with the RB allocation trends:
 - URLLC achieves the highest sustained throughput
@@ -129,7 +133,8 @@ This confirms that throughput optimization is secondary to SLA preservation unde
 
 ### 5. Training Reward Curve
 
-![Training Reward Curve](./figures/training_reward_curve.png)
+<img width="707" height="393" alt="image" src="https://github.com/user-attachments/assets/364fe35b-f1e7-42d8-ab7b-900ae6a9db90" />
+
 
 The reward curve shows **stable but negative convergence**, with occasional sharp drops corresponding to severe SLA penalties. Although the learning process is stable, the negative reward magnitude suggests suboptimal global performance.
 
