@@ -31,15 +31,45 @@ The framework is implemented using Gymnasium and Stable-Baselines3 and evaluated
 
 ---
 
-## 🧠 Methodology
+## 🔬 Methodology
 
-- **State Space**: Queue lengths and traffic arrival rates per slice  
-- **Action Space**: Continuous RB allocation ratios  
-- **Reward Function**:
-  - Positive reward for SLA satisfaction and throughput
-  - Slice-specific penalties for SLA violations
-- **RL Algorithm**: Proximal Policy Optimization (PPO)
+### 1. Problem Formulation
 
+The dynamic radio resource allocation problem for 5G RAN network slicing is formulated as a **Markov Decision Process (MDP)**. The objective is to optimally allocate a fixed number of radio resource blocks (RBs) among heterogeneous service slices—eMBB, URLLC, and mMTC—while satisfying slice-specific Service Level Agreements (SLAs) related to throughput and latency.
+
+At each decision epoch, the agent observes the current network state and selects a continuous RB allocation vector. The action is normalized to ensure that the total allocated resources do not exceed the available RB budget.
+
+---
+
+### 2. Environment Design
+
+A custom simulation environment is implemented using the **Gymnasium** framework to emulate end-to-end RAN slicing behavior. Each network slice is modeled with independent traffic arrival rates and queue dynamics, reflecting heterogeneous service requirements.
+
+Queue evolution follows a discrete-time update rule based on incoming traffic and allocated service capacity. Latency is estimated from queue backlogs and service rates, with strict constraints applied to URLLC traffic. The environment deterministically transitions between states based on the agent’s actions and observed traffic conditions.
+
+---
+
+### 3. State and Action Space
+
+The **state space** captures slice-level network information, including queue lengths and traffic arrival rates for each slice. This representation provides sufficient observability for the agent to learn congestion-aware and SLA-compliant allocation policies.
+
+The **action space** is continuous and represents the proportion of total RBs allocated to each slice. Actions are clipped and normalized to enforce feasibility and physical consistency of resource allocation.
+
+---
+
+### 4. Reward Function Design
+
+An SLA-aware reward function is designed to jointly optimize throughput and latency performance. Positive rewards are assigned proportionally to the successfully served traffic, while penalties are imposed for SLA violations such as insufficient throughput or excessive latency.
+
+To reflect service criticality, higher penalty weights are assigned to URLLC SLA violations, followed by eMBB and mMTC, ensuring priority-aware learning behavior.
+
+---
+
+### 5. Learning Algorithm
+
+The resource allocation policy is learned using **Proximal Policy Optimization (PPO)**, a policy-gradient reinforcement learning algorithm well-suited for continuous control problems. PPO provides stable policy updates by constraining the deviation between successive policies.
+
+The agent is trained over multiple episodes, and performance is evaluated using system-level metrics including average throughput, SLA violation rate, queue stability, and resource allocation fairness across slices.
 ---
 
 ## 📊 Results
