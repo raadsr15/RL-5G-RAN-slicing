@@ -73,12 +73,84 @@ The agent is trained over multiple episodes, and performance is evaluated using 
 
 ---
 
-## 📊 Results
+## 📊 Results and Analysis
 
-The trained agent demonstrates:
-- Improved SLA compliance, especially for URLLC
-- Stable queue dynamics under heterogeneous traffic
-- Adaptive RB allocation strategies
-- Superior performance compared to static slicing baselines
+This section presents the performance evaluation of the proposed **PPO-based RAN slicing agent** across multiple system-level metrics. Each subsection includes a placeholder to attach the corresponding figure, enabling clear visual interpretation of the learned policy behavior.
 
 ---
+
+### 1. RB Allocation Policy Over Time
+
+![RB Allocation Policy Over Time](./figures/rb_allocation_over_time.png)
+
+The learned policy shows a **highly skewed RB allocation** favoring URLLC, followed by mMTC, with eMBB receiving negligible resources. This reflects the reward structure’s prioritization of strict latency constraints for URLLC, causing the agent to aggressively avoid high-penalty SLA violations.
+
+**Observation:**  
+While URLLC performance is protected, this comes at the expense of eMBB starvation, indicating a trade-off between SLA strictness and fairness.
+
+---
+
+### 2. Queue Length Evolution
+
+![Queue Length Evolution](./figures/queue_length_evolution.png)
+
+The queue dynamics reveal **unbounded growth in the eMBB queue**, confirming persistent under-allocation of RBs to eMBB traffic. In contrast, URLLC and mMTC queues remain stable and near zero.
+
+**Interpretation:**  
+The PPO agent successfully stabilizes latency-sensitive slices but fails to maintain queue stability for high-throughput services under the current reward formulation.
+
+---
+
+### 3. SLA Violation Rate per Slice
+
+![SLA Violation Rate per Slice](./figures/sla_violation_rate.png)
+
+The SLA violation analysis shows:
+- **eMBB:** ~100% violation rate  
+- **URLLC:** 0% violation  
+- **mMTC:** 0% violation  
+
+This outcome highlights the **dominance of URLLC penalties** in shaping the policy and demonstrates how asymmetric SLA weighting can strongly bias learning behavior.
+
+---
+
+### 4. Average Throughput per Slice
+
+![Average Throughput per Slice](./figures/average_throughput.png)
+
+The average throughput results align with the RB allocation trends:
+- URLLC achieves the highest sustained throughput
+- mMTC maintains moderate throughput
+- eMBB throughput collapses due to starvation
+
+This confirms that throughput optimization is secondary to SLA preservation under the current reward design.
+
+---
+
+### 5. Training Reward Curve
+
+![Training Reward Curve](./figures/training_reward_curve.png)
+
+The reward curve shows **stable but negative convergence**, with occasional sharp drops corresponding to severe SLA penalties. Although the learning process is stable, the negative reward magnitude suggests suboptimal global performance.
+
+---
+
+### 6. Baseline vs RL Policy Comparison
+
+| Policy        | Average Reward |
+|---------------|----------------|
+| Fixed Baseline | **1.23**       |
+| PPO Agent     | **-2.44**      |
+
+Despite its adaptability, the RL agent underperforms a simple fixed allocation baseline. This highlights an important insight: **poorly balanced reward functions can cause RL agents to learn overly conservative or degenerate policies**.
+
+---
+
+### Summary of Findings
+
+- PPO effectively enforces URLLC SLA constraints
+- Severe resource starvation occurs for eMBB
+- Reward shaping dominates policy behavior
+- Baseline policies can outperform RL under misaligned objectives
+
+These results motivate future work on **multi-objective reward design, fairness constraints, and dynamic SLA weighting**, particularly for realistic 5G/6G network slicing scenarios.
