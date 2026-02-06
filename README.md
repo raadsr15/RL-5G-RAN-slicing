@@ -159,3 +159,27 @@ Despite its adaptability, the RL agent underperforms a simple fixed allocation b
 - Baseline policies can outperform RL under misaligned objectives
 
 These results motivate future work on **multi-objective reward design, fairness constraints, and dynamic SLA weighting**, particularly for realistic 5G/6G network slicing scenarios.
+
+
+##  Installation
+
+To get started with this project, follow the steps below:
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/raadsr15/RL-5G-RAN-slicing.git
+cd RL-5G-RAN-slicing
+```
+
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Train the model and evaluate model performance
+   
+```bash
+jupyter notebook RL-5G-RAN-slicing.ipynb
+```
